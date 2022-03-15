@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <nav class="d-flex justify-content-between align-items-center">
-            <h1>Bienvenid@ Cynthia</h1>
+            <h1>Bienvenid@ {{user.first_name}}</h1>
             <a href="/new/recipe" class="btn btn-primary">Agregar Receta</a>
             <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
         </nav>
@@ -23,33 +23,25 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>Albondigas</td>
-                    <td>Si</td>
-                    <td>
-                        <a href="/recipe/ID">Ver Receta</a>
-                        <a href="/edit/recipe/ID">Editar</a>
-                        <a href="/delete/recipe/ID">Borrar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Hotdogs</td>
-                    <td>Si</td>
-                    <td>
-                        <a href="/recipe/ID">Ver Receta</a>
-                        <a href="/edit/recipe/ID">Editar</a>
-                        <a href="/delete/recipe/ID">Borrar</a>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Cortadillo</td>
-                    <td>No</td>
-                    <td>
-                        <a href="/recipe/ID">Ver Receta</a>
-                        <a href="/edit/recipe/ID">Editar</a>
-                        <a href="/delete/recipe/ID">Borrar</a>
-                    </td>
-                </tr>
+                {% for recipe in recipes %}
+                    <tr>
+                        <td>{{recipe.name}}</td>
+                        <td>
+                            {% if recipe.under30 == 0 %}
+                                NO
+                            {% else %}
+                                SI
+                            {% endif %}
+                        </td>
+                        <td>
+                            <a href="/show/recipe/{{recipe.id}}">Ver Receta</a>
+                            {% if recipe.user_id == user.id %}
+                                <a href="/edit/recipe/{{recipe.id}}">Editar</a>
+                                <a href="/delete/recipe/{{recipe.id}}">Borrar</a>
+                            {% endif %}
+                        </td>
+                    </tr>
+                {% endfor %}
             </tbody>
         </table>
     </div>
