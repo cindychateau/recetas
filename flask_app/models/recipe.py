@@ -42,6 +42,7 @@ class Recipe:
         nuevoId = connectToMySQL('esquema_recetas').query_db(query, data)
         return nuevoId
     
+    #te regresa TODOS los registros
     @classmethod
     def get_all(cls):
         query = "SELECT * FROM recipes"
@@ -51,7 +52,8 @@ class Recipe:
             #rec = cls(receta)
             recetas.append(cls(receta))
         return recetas
-    
+
+    #Solo te regresa 1 registro
     @classmethod
     def get_by_id(cls, data):
         query = "SELECT * FROM recipes WHERE id = %(id)s"

@@ -13,6 +13,7 @@
             <h1>Bienvenid@ {{user.first_name}}</h1>
             <a href="/new/recipe" class="btn btn-primary">Agregar Receta</a>
             <a href="/logout" class="btn btn-danger">Cerrar Sesión</a>
+            <img src="{{ url_for('static', filename = 'img/img.png') }}">
         </nav>
         <table class="table table-hover">
             <thead>
